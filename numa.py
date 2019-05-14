@@ -17,6 +17,21 @@ def interpolate(xi, yi, x, met, verb):
 				print("")
 			y += l*yi[i]
 	if met == "N":
-		print("TODO")
+		divdif = sp.zeros(n, n)
+		for i in range(n): # divdif[xi] = yi
+			divdif[i,0] = yi[i]
+		for j in range(n):
+			w = 1 # product of (x - xi)
+			for k in range(j):
+				w *= (x-xi[k])
+			for i in range(n-j-1): # compute every divided diffs of j-th order
+				divdif[i,j+1] = (divdif[i+1,j] - divdif[i,j])/(xi[i+j+1] - xi[i])
+			t = w*divdif[0,j]
+			# verbose mode: show every computed term for Newton polynom
+			if verb:
+				print("\nt[%d] = " % j)
+				sp.pprint(t)
+				print("")
+			y += t
 	return y
 
