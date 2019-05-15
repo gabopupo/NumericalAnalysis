@@ -1,4 +1,18 @@
 import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+# utilitary function for function plotting
+def dotplot(xi, yi, x, y, a, b):
+    xi = np.array(xi).astype(np.int64)
+    yi = np.array(yi).astype(np.int64)
+    lf = sp.lambdify(x, y, modules=["numpy"])
+    xval = np.linspace(a, b, 100)
+    yval = lf(xval)
+
+    plt.plot(xval, yval)
+    plt.plot(xi, yi, 'ro')
+    plt.show()
 
 def interpolate(xi, yi, x, met, verb):
 	n = xi.shape[0]
