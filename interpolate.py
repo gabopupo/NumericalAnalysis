@@ -15,7 +15,7 @@ def main():
 	x = sp.symbols("x")
 	for i in range(int(n)):
 		pair = input("Pair %d: " % (i+1)).split()
-		xi[i], yi[i] = int(pair[0]), int(pair[1])
+		xi[i], yi[i] = float(pair[0]), float(pair[1])
 	y = interpolate(xi, yi, x, met, True if (len(sys.argv) > 2 and verb == "V") else False)
 	print("Interpolated expression:")
 	sp.pprint(sp.simplify(sp.factor(y)))
